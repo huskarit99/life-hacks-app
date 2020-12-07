@@ -23,32 +23,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lifehack.activities.Hack;
 import com.example.lifehack.models.Category;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Category> categories;
@@ -64,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         mapping();
-        init();
-        
+        categories = new ArrayList<Category>();
+        getDataFromGoogleSheets();
 //        printKeyHash();
 
         customAdapter = new MainActivity.CustomAdapter();
@@ -74,11 +61,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, Hack.class);
-                intent.putExtra("LISTHACKS", (ArrayList) hacks);
+                intent.putExtra("LISTHACKS", (ArrayList) categories.get(position).getHacks());
                 startActivity(intent);
             }
         });
-        getDataFromGoogleSheets();
     }
 
     private void getDataFromGoogleSheets() {
@@ -91,8 +77,44 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject packet = new JSONObject(response);
                     JSONArray data = (JSONArray) packet.get("Sheet1");
                     for (int i = 0; i < data.length(); i++)  {
-                        System.out.println(data.get(i));
+                        JSONObject json = (JSONObject) data.get(i);
+                        Iterator<String> keys = json.keys();
+                        if (i == 0) {
+                            int j = 0;
+                            while(keys.hasNext()) {
+                                String key = keys.next();
+                                categories.add(new Category());
+                                categories.get(j).setCategory_name(key);
+                                j++;
+                            }
+                        }
+                        if (i == 0) {
+                            keys = json.keys();
+                            int j = 0;
+                            String url = "https://drive.google.com/uc?id=";
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                categories.get(j).setCategory_image(url + String.valueOf(json.get(key)));
+                                j++;
+                            }
+                        }
+                        else {
+                            keys = json.keys();
+                            int j = 0;
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                String hack = String.valueOf(json.get(key));
+                                hack = hack.replace(" ", "");
+                                if (!hack.equals("")) {
+                                    categories.get(j).addOneHack(String.valueOf(json.get(key)));
+                                    System.out.println(categories.get(j).getHacks());
+                                }
+                                j++;
+                            }
+                        }
                     }
+                    customAdapter = new MainActivity.CustomAdapter();
+                    listCategories.setAdapter(customAdapter);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -130,53 +152,7 @@ public class MainActivity extends AppCompatActivity {
         listCategories = findViewById(R.id.listCategories);
     }
 
-    public void init() {
-        hacks.add("Forgot your computer password? Boot up in safe mode (F8 during startup), log in as administrator and then change your password.");
-        hacks.add("Save your keyboard from a coffee spill -\n" +
-                "We’ve all been there. You’re being very careful, drinking coffee or another acidic or sugary beverage while working on your computer. Then, before you know what’s happening, bam. Your keyboard is flooded.\n" +
-                "\n" +
-                "Don’t panic in this scenario. Instead, your first step should be to turn off your computer and unplug it from any power sources or external hard drives, advises New York Times Personal Tech columnist J.D. Biersdorfer. Take out the device's battery, if your computer is designed to allow this.\n" +
-                "\n" +
-                "Ignore the instinct to wipe down your laptop and, instead, blot the spill with a clean towel. If you use a wiping motion, you might push the liquid further into the machine.\n" +
-                "\n" +
-                "If you’re able to, turn the laptop upside down and leave it off to allow as much of the liquid to drain out as possible. If a ton of liquid (something other than water) has spilled onto it, and you’re able to take it in to a repair shop right then, do so.\n" +
-                "\n" +
-                "Luckily, this sort of hazard is preventable: Use a plastic keyboard cover, or drink from a mug with a lid that locks.");
-        hacks.add("Rest your eyes -\n" +
-                "Even those of us who complain of having to stare at a computer screen all day don’t always take the necessary precautions to minimize eye strain.\n" +
-                "\n" +
-                "First, make a point of looking away from the screen at regular intervals. One widely accepted, easy-to-remember strategy is, every 20 minutes, look at an object at least 20 feet away for at least 20 seconds. The Canadian Association of Optometrists refers to this as the 20-20-20 rule.\n" +
-                "\n" +
-                "\n" +
-                "If you’re able to shift the angle of your computer screen or monitor so overhead lights don’t create painful glare, do so. Another option is to download an add-on such as Flux, which will filter out some of the blue light from your display, leaving your screen looking yellowish. You can use this setting round the clock, but its developers otherwise program it to kick in around sunset. A less blue and dimmer screen is easier on the eyes, and it’s designed to help you sleep better at night.\n" +
-                "\n" +
-                "For Mac users, Apple released a similar tool within its software in early 2017, called Night Shift. The support page for the feature states, “Studies have shown that exposure to bright blue light in the evening can affect your circadian rhythms and make it harder to fall asleep.”");
-        hacks.add("Try these office grooming hacks -\n" +
-                "Even a day at the office can take its toll. Over the course of a day, even if you’re sitting at a desk for most of it, you can become sweaty, your breath may start to stink, your makeup may need a touch-up and more.\n" +
-                "\n" +
-                "Rather than taking a bunch of toiletries to work, look around the office and improvise with the supplies available. For instance, you can use coffee filters to blot the oil from your face or shine your shoes with a banana peel.\n" +
-                "\n" +
-                "Another trick you can try, if you notice your body odor is becoming a bit strong, is to take a spray bottle, fill it with some vodka (someone in your office probably has a bottle, right?) and spritz it on your clothes.");
-        categories = new ArrayList<Category>();
-        categories.add(new Category("Technology",
-                "https://drive.google.com/uc?id=1PFda-GIHF-7bbhXZTfHwYaQP6r-x8c51",
-                hacks));
-        categories.add(new Category("Foods & Drinks",
-                "https://drive.google.com/uc?id=1JkqMUgGtGHJbKpvEOnvrGzjkglgaK2l3",
-                hacks));
-        categories.add(new Category("Health & Fitness",
-                "https://drive.google.com/uc?id=15BzJLyFyArmgBV0QrenANWUaRz0zYvJI",
-                hacks));
-        categories.add(new Category("Life",
-                "https://drive.google.com/uc?id=1RSncDmY3DhIA_QvKoAhqWQl6AKxN3J7L",
-                hacks));
-        categories.add(new Category("Money Saver",
-                "https://drive.google.com/uc?id=14i8qydxVDH9P04DVqLGz_78RMEwDqq_-",
-                hacks));
-    }
-
     class CustomAdapter extends BaseAdapter {
-
         @Override
         public int getCount() {
             return categories.size();

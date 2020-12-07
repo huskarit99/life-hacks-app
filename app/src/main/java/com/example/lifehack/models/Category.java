@@ -51,4 +51,9 @@ public class Category implements Serializable {
         this.hacks = new ArrayList<>(hacks);
         this.number_of_hacks = this.hacks.size();
     }
+
+    public void addOneHack(String hack) {
+        this.hacks.add(hack);
+        this.number_of_hacks++;
+    }
 }
