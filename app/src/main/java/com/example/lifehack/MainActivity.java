@@ -24,13 +24,28 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.lifehack.activities.Hack;
 import com.example.lifehack.models.Category;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -63,17 +78,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         getDataFromGoogleSheets();
     }
 
     private void getDataFromGoogleSheets() {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        String url = "https://spreadsheets.google.com/tq?key=1s6p8sWRznMsy0ggI-gd1kPRFPHuX5GB6FwfiOApuw8E";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+        String url = "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1s6p8sWRznMsy0ggI-gd1kPRFPHuX5GB6FwfiOApuw8E&sheet=Sheet1";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONArray response) {
-                System.out.println(response);
+            public void onResponse(String response) {
+                try {
+                    JSONObject packet = new JSONObject(response);
+                    JSONArray data = (JSONArray) packet.get("Sheet1");
+                    for (int i = 0; i < data.length(); i++)  {
+                        System.out.println(data.get(i));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -81,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
                 if (error instanceof NetworkError) {
                     Toast.makeText(MainActivity.this, "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
                 } else {
+                    System.out.println(String.valueOf(error));
                     Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_LONG).show();
                 }
             }
         });
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(stringRequest);
     }
 
     private void printKeyHash() {
