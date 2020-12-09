@@ -1,17 +1,21 @@
 package com.example.lifehack.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lifehack.MainActivity;
@@ -29,7 +33,10 @@ import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Hack extends AppCompatActivity {
     ImageView ivButtonRight, ivButtonLeft, ivButtonBack, ivButtonShare;
@@ -80,74 +87,67 @@ public class Hack extends AppCompatActivity {
         ivButtonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Hack.this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
 
         ivButtonShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Target target = new Target() {
-//                    @Override
-//                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                        SharePhoto sharePhoto = new SharePhoto.Builder()
-//                                .setBitmap(bitmap)
-//                                .build();
-//                        if (ShareDialog.canShow(SharePhotoContent.class)) {
-//                            SharePhotoContent content = new SharePhotoContent.Builder()
-//                                    .addPhoto(sharePhoto)
-//                                    .build();
-//                            shareDialog.show(content);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-//                    }
-//
-//                    @Override
-//                    public void onPrepareLoad(Drawable placeHolderDrawable) {
-//                    }
-//                };
-//                Picasso.get()
-//                        .load("https://drive.google.com/uc?id=1PFda-GIHF-7bbhXZTfHwYaQP6r-x8c51")
-//                        .into(target);
+                String[] choices = {"Facebook", "Messenger"};
 
-//                ShareMessengerURLActionButton actionButton =
-//                        new ShareMessengerURLActionButton.Builder()
-//                                .setTitle("Visit Facebook")
-//                                .setUrl(Uri.parse("https://www.facebook.com"))
-//                                .build();
-//                ShareMessengerGenericTemplateElement genericTemplateElement =
-//                        new ShareMessengerGenericTemplateElement.Builder()
-//                                .setTitle("Life Hack")
-//                                .setSubtitle("Visit Messenger")
-//                                .setImageUrl(Uri.parse("https://drive.google.com/uc?id=1PFda-GIHF-7bbhXZTfHwYaQP6r-x8c51"))
-//                                .setButton(actionButton)
-//                                .build();
-//                ShareMessengerGenericTemplateContent genericTemplateContent =
-//                        new ShareMessengerGenericTemplateContent.Builder()
-//                                .setPageId("840673686782363") // Your page ID, required
-//                                .setGenericTemplateElement(genericTemplateElement)
-//                                .build();
-//                    MessageDialog.show(Hack.this, genericTemplateContent);
-//            }
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent
-                        .putExtra(Intent.EXTRA_TEXT,
-                                "I found a life tip: " + '"' + hacks.get(index_of_Hacks) + '"');
-                sendIntent.setType("text/plain");
-                sendIntent.setPackage("com.facebook.orca");
-                try {
-                    startActivity(sendIntent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(Hack.this, "Please Install Facebook Messenger", Toast.LENGTH_LONG).show();
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(Hack.this);
+                builder.setTitle("Sharing with apps");
+                builder.setItems(choices, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (choices[which] == "Facebook") {
+                            sharingOnTimeline();
+                        } else {
+                            sharingOnMessenger();
+                        }
+                    }
+                });
+                builder.show();
             }
         });
+    }
+
+    private void sharingOnMessenger() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent
+                .putExtra(Intent.EXTRA_TEXT,
+                        "I found a life tip: " + '"' + hacks.get(index_of_Hacks) + '"');
+        sendIntent.setType("text/plain");
+        sendIntent.setPackage("com.facebook.orca");
+//        sendIntent.setPackage("com.facebook.katana");
+        try {
+            startActivity(sendIntent);
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(Hack.this, "Please Install Facebook Messenger", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void sharingOnTimeline() {
+        try {
+            View v = getWindow().getDecorView().getRootView();
+            Bitmap bitmap = Bitmap.createBitmap(v.getWidth(),
+                    v.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            v.draw(canvas);
+
+            SharePhoto sharePhoto = new SharePhoto.Builder()
+                    .setBitmap(bitmap)
+                    .setCaption("Testing")
+                    .build();
+                SharePhotoContent content = new SharePhotoContent.Builder()
+                        .addPhoto(sharePhoto)
+                        .build();
+                shareDialog.show(content);
+        } catch (Throwable e) {
+            Toast.makeText(Hack.this, "Please Install Facebook", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void init() {

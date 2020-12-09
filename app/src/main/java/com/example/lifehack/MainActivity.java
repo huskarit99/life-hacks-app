@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.lifehack.activities.Hack;
 import com.example.lifehack.models.Category;
 import com.squareup.picasso.Picasso;
@@ -37,34 +38,21 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
+
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Category> categories;
     CustomAdapter customAdapter;
     ListView listCategories;
-    ArrayList<String> hacks = new ArrayList<>();
-    ArrayList listData = new ArrayList<>();
+    ArrayList<Category> categories = new ArrayList<Category>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home);
         getSupportActionBar().hide();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        mapping();
-        categories = new ArrayList<Category>();
         getDataFromGoogleSheets();
 //        printKeyHash();
-
-        customAdapter = new MainActivity.CustomAdapter();
-        listCategories.setAdapter(customAdapter);
-        listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, Hack.class);
-                intent.putExtra("LISTHACKS", (ArrayList) categories.get(position).getHacks());
-                startActivity(intent);
-            }
-        });
     }
 
     private void getDataFromGoogleSheets() {
@@ -107,14 +95,23 @@ public class MainActivity extends AppCompatActivity {
                                 hack = hack.replace(" ", "");
                                 if (!hack.equals("")) {
                                     categories.get(j).addOneHack(String.valueOf(json.get(key)));
-                                    System.out.println(categories.get(j).getHacks());
                                 }
                                 j++;
                             }
                         }
                     }
+                    setContentView(R.layout.activity_main);
+                    mapping();
                     customAdapter = new MainActivity.CustomAdapter();
                     listCategories.setAdapter(customAdapter);
+                    listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Intent intent = new Intent(MainActivity.this, Hack.class);
+                            intent.putExtra("LISTHACKS", (ArrayList) categories.get(position).getHacks());
+                            startActivity(intent);
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -125,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 if (error instanceof NetworkError) {
                     Toast.makeText(MainActivity.this, "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
                 } else {
-                    System.out.println(String.valueOf(error));
                     Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_LONG).show();
                 }
             }
@@ -178,7 +174,10 @@ public class MainActivity extends AppCompatActivity {
 
             tvCategory_name.setText(categories.get(position).getCategory_name());
             tvNumberOfHacks.setText(String.valueOf(categories.get(position).getNumber_of_hacks()) + " Hacks");
-            Picasso.get().load(categories.get(position).getCategory_image()).into(ivCategoryImage);
+            Glide   .with(MainActivity.this)
+                    .load(categories.get(position)
+                    .getCategory_image())
+                    .into(ivCategoryImage);
             return view;
         }
     }
