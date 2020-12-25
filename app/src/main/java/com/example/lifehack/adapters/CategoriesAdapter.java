@@ -65,7 +65,7 @@ public class CategoriesAdapter extends BaseAdapter {
         TextView tvNameCategoryRight = view.findViewById(R.id.tvNameCategoryRight);
 
         if (position*2 < categories.size()) {
-            tvNameCategoryLeft.setText(categories.get(position * 2).getCategory_name());
+            tvNameCategoryLeft.setText(categories.get(position * 2).getCategory_name().replace('_', ' '));
             Glide.with(ctx)
                     .load(categories.get(position * 2)
                             .getCategory_image())
@@ -85,7 +85,7 @@ public class CategoriesAdapter extends BaseAdapter {
             civLeft.setVisibility(View.GONE);
         }
         if (position*2+1 < categories.size()) {
-            tvNameCategoryRight.setText(categories.get(position*2+1).getCategory_name());
+            tvNameCategoryRight.setText(categories.get(position*2+1).getCategory_name().replace('_', ' '));
             Glide.with(ctx)
                     .load(categories.get(position*2+1)
                             .getCategory_image())

@@ -42,7 +42,6 @@
         app:layout_constraintRight_toRightOf="@id/ivBackgroundCircleImageLeft">
     </de.hdodenhof.circleimageview.CircleImageView>
     <TextView
-        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvNameCategoryLeft"
@@ -51,7 +50,7 @@
         app:layout_constraintLeft_toLeftOf="@id/barrier1"
         app:layout_constraintRight_toRightOf="@id/barrier2"
         android:textStyle="bold"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:textSize="15dp"
         android:textColor="@color/name_color_category">
     </TextView>
@@ -94,7 +93,7 @@
         app:layout_constraintRight_toRightOf="@id/barrier4"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textStyle="bold"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:textSize="15dp"
         android:textColor="@color/name_color_category">
     </TextView>
@@ -102,24 +101,24 @@
         android:id="@+id/barrier1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="start"
+        app:barrierDirection="left"
         app:constraint_referenced_ids="ivBackgroundCircleImageLeft"/>
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="end"
+        app:barrierDirection="right"
         app:constraint_referenced_ids="ivBackgroundCircleImageLeft"/>
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="start"
+        app:barrierDirection="left"
         app:constraint_referenced_ids="ivBackgroundCircleImageRight"/>
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="end"
+        app:barrierDirection="right"
         app:constraint_referenced_ids="ivBackgroundCircleImageRight"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

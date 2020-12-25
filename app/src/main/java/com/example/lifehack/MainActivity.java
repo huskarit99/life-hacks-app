@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
                     Toast.makeText(MainActivity.this, "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
-                    loadDataFromCacheMemory();
                     renderData(categoriesOfCache);
                 } else {
                     Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_LONG).show();
