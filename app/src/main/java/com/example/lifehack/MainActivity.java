@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.lifehack.activities.Hack;
+import com.example.lifehack.adapters.CategoriesAdapter;
+import com.example.lifehack.databases.LocalDatabase;
 import com.example.lifehack.models.Category;
 import com.squareup.picasso.Picasso;
 
@@ -38,24 +41,52 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
-    CustomAdapter customAdapter;
+    ImageView ivNavigationBar;
+
+    CategoriesAdapter customAdapter;
+
     ListView listCategories;
     ArrayList<Category> categories = new ArrayList<Category>();
+
+    LocalDatabase localDatabase;
+    ArrayList<Category> categoriesOfCache = new ArrayList<Category>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        localDatabase = new LocalDatabase(this);
         setContentView(R.layout.home);
-        getSupportActionBar().hide();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        getDataFromGoogleSheets();
-//        printKeyHash();
+        configActionBarAndNavigationBar();
+
+        loadDataFromCacheMemory();
+        loadDataFromGoogleSheets();
     }
 
-    private void getDataFromGoogleSheets() {
+    private void configActionBarAndNavigationBar() {
+        getSupportActionBar().hide();
+
+        View decorView = getWindow().getDecorView();
+        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        decorView.setSystemUiVisibility(flags);
+    }
+
+    private void saveData() {
+        localDatabase.setCategories(categories);
+    }
+
+    private void loadDataFromCacheMemory() {
+        categoriesOfCache = localDatabase.getCategories();
+    }
+
+    private void loadDataFromGoogleSheets() {
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         String url = "https://script.google.com/macros/s/AKfycbxOLElujQcy1-ZUer1KgEvK16gkTLUqYftApjNCM_IRTL3HSuDk/exec?id=1s6p8sWRznMsy0ggI-gd1kPRFPHuX5GB6FwfiOApuw8E&sheet=Sheet1";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -100,18 +131,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    setContentView(R.layout.activity_main);
-                    mapping();
-                    customAdapter = new MainActivity.CustomAdapter();
-                    listCategories.setAdapter(customAdapter);
-                    listCategories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Intent intent = new Intent(MainActivity.this, Hack.class);
-                            intent.putExtra("LISTHACKS", (ArrayList) categories.get(position).getHacks());
-                            startActivity(intent);
-                        }
-                    });
+                    saveData();
+                    renderData(categories);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -121,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
                     Toast.makeText(MainActivity.this, "Cannot connect to Internet...Please check your connection!", Toast.LENGTH_LONG).show();
+                    loadDataFromCacheMemory();
+                    renderData(categoriesOfCache);
                 } else {
                     Toast.makeText(MainActivity.this, String.valueOf(error), Toast.LENGTH_LONG).show();
                 }
@@ -129,56 +152,25 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void printKeyHash() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo("com.example.lifehack", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash", android.util.Base64.encodeToString(md.digest(), android.util.Base64.DEFAULT));
+    private void renderData(ArrayList<Category> categories) {
+        setContentView(R.layout.activity_on_boarding);
+        mapping();
+        customAdapter = new CategoriesAdapter(MainActivity.this, categories);
+        listCategories.setAdapter(customAdapter);
+        externalListioner();
+    }
+
+    private void externalListioner() {
+        ivNavigationBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        } catch(PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        });
     }
 
     private void mapping() {
         listCategories = findViewById(R.id.listCategories);
+        ivNavigationBar = findViewById(R.id.ivNavigationBar);
     }
-
-    class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return categories.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            view = getLayoutInflater().inflate(R.layout.row_category, null);
-
-            ImageView ivCategoryImage = view.findViewById(R.id.ivCategoryImage);
-            TextView tvCategory_name = view.findViewById(R.id.tvCategory_name);
-            TextView tvNumberOfHacks = view.findViewById(R.id.tvNumberOfHacks);
-
-            tvCategory_name.setText(categories.get(position).getCategory_name());
-            tvNumberOfHacks.setText(String.valueOf(categories.get(position).getNumber_of_hacks()) + " Hacks");
-            Glide   .with(MainActivity.this)
-                    .load(categories.get(position)
-                    .getCategory_image())
-                    .into(ivCategoryImage);
-            return view;
-        }
-    }
-}
+ }
