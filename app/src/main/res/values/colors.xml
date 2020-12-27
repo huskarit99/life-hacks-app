@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background_color_detail">#41999A</color>
     <color name="transparent">#00000000</color>
     <color name="background_color_on_boarding">#EDF6F9</color>
     <color name="name_color_category">#E29578</color>

@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.lifehack.activities.Detail;
 import com.example.lifehack.activities.Hack;
 import com.example.lifehack.adapters.CategoriesAdapter;
 import com.example.lifehack.databases.LocalDatabase;
@@ -58,17 +60,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        localDatabase = new LocalDatabase(this);
+//        localDatabase = new LocalDatabase(this);
         setContentView(R.layout.home);
         configActionBarAndNavigationBar();
 
-        loadDataFromCacheMemory();
-        loadDataFromGoogleSheets();
+        Intent intent = new Intent(MainActivity.this, Detail.class);
+        this.startActivity(intent);
+        finish();
+//        loadDataFromCacheMemory();
+//        loadDataFromGoogleSheets();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configActionBarAndNavigationBar();
     }
 
     private void configActionBarAndNavigationBar() {
         getSupportActionBar().hide();
-
+        getWindow().setStatusBarColor(Color.parseColor("#F9FCFD"));
         View decorView = getWindow().getDecorView();
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

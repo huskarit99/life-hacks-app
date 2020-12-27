@@ -8,7 +8,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_header"
+        android:background="@drawable/bg_header_boarding"
+        android:scaleType="fitXY"
         android:id="@+id/ivBackgroundHeader"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,8 +44,7 @@
         app:layout_constraintVertical_bias="0.07"
         android:textColor="@color/title_color"
         app:layout_constraintHorizontal_bias="0.2"
-        android:layout_margin="0dp"
-        >
+        android:layout_margin="0dp">
     </TextView>
     <ImageView
         android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/background_on_boarding"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_body_boarding"
         android:id="@+id/ivBackgroundOnBoarding"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -72,7 +73,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/bg_footer"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_footer_boarding"
         android:id="@+id/ivBackgroundFooter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
