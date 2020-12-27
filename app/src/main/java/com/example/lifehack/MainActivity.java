@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.lifehack.activities.Detail;
 import com.example.lifehack.activities.Hack;
+import com.example.lifehack.activities.Setting;
 import com.example.lifehack.adapters.CategoriesAdapter;
 import com.example.lifehack.databases.LocalDatabase;
 import com.example.lifehack.models.Category;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.home);
         configActionBarAndNavigationBar();
 
-        Intent intent = new Intent(MainActivity.this, Detail.class);
+        Intent intent = new Intent(MainActivity.this, Setting.class);
         this.startActivity(intent);
         finish();
 //        loadDataFromCacheMemory();

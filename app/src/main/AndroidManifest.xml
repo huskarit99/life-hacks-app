@@ -29,6 +29,12 @@
         <activity
             android:name="com.example.lifehack.activities.Detail"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.example.lifehack.activities.Premium"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.example.lifehack.activities.Setting"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
