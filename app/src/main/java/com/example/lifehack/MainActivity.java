@@ -48,7 +48,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MainActivity extends AppCompatActivity {
-    ImageView ivNavigationBar;
+    ImageView ivNavigationBar, ivSetting;
 
     CategoriesAdapter customAdapter;
 
@@ -61,15 +61,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        localDatabase = new LocalDatabase(this);
-        setContentView(R.layout.home);
+        localDatabase = new LocalDatabase(this);
+        setContentView(R.layout.activity_on_boarding);
         configActionBarAndNavigationBar();
 
-        Intent intent = new Intent(MainActivity.this, Setting.class);
-        this.startActivity(intent);
-        finish();
-//        loadDataFromCacheMemory();
-//        loadDataFromGoogleSheets();
+        loadDataFromCacheMemory();
+        loadDataFromGoogleSheets();
     }
 
     @Override
@@ -168,14 +165,22 @@ public class MainActivity extends AppCompatActivity {
         mapping();
         customAdapter = new CategoriesAdapter(MainActivity.this, categories);
         listCategories.setAdapter(customAdapter);
-        externalListioner();
+        eventListener();
     }
 
-    private void externalListioner() {
+    private void eventListener() {
         ivNavigationBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        ivSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
             }
         });
     }
@@ -183,5 +188,6 @@ public class MainActivity extends AppCompatActivity {
     private void mapping() {
         listCategories = findViewById(R.id.listCategories);
         ivNavigationBar = findViewById(R.id.ivNavigationBar);
+        ivSetting = findViewById(R.id.ivSetting);
     }
  }

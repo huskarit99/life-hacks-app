@@ -9,10 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 import com.example.lifehack.R;
-import com.example.lifehack.activities.Hack;
+import com.example.lifehack.activities.Detail;
 import com.example.lifehack.models.Category;
 
 import java.util.ArrayList;
@@ -55,17 +54,16 @@ public class CategoriesAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.row_category, null);
 
         CircleImageView civLeft = view.findViewById(R.id.civLeft);
-        ImageView ivBackgroundCircleImageLeft = view.findViewById(R.id.ivBackgroundCircleImageLeft);
-        ImageView ivBackgroundShadowCircleImageLeft = view.findViewById(R.id.ivBackgroundShadowCircleImageRight);
+        ImageView ivFrameCategoryLeft = view.findViewById(R.id.ivFrameCategoryLeft);
         TextView tvNameCategoryLeft = view.findViewById(R.id.tvNameCategoryLeft);
 
         CircleImageView civRight = view.findViewById(R.id.civRight);
-        ImageView ivBackgroundCircleImageRight = view.findViewById(R.id.ivBackgroundCircleImageRight);
-        ImageView ivBackgroundShadowCircleImageRight = view.findViewById(R.id.ivBackgroundShadowCircleImageRight);
+        ImageView ivFrameCategoryRight = view.findViewById(R.id.ivFrameCategoryRight);
         TextView tvNameCategoryRight = view.findViewById(R.id.tvNameCategoryRight);
 
         if (position*2 < categories.size()) {
-            tvNameCategoryLeft.setText(categories.get(position * 2).getCategory_name().replace('_', ' '));
+            categories.get(position*2).setCategory_name(categories.get(position*2).getCategory_name().replace('_', ' '));
+            tvNameCategoryLeft.setText(categories.get(position*2).getCategory_name());
             Glide.with(ctx)
                     .load(categories.get(position * 2)
                             .getCategory_image())
@@ -74,18 +72,19 @@ public class CategoriesAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ctx, Hack.class);
+                    Intent intent = new Intent(ctx, Detail.class);
                     intent.putExtra("LISTHACKS", (ArrayList) categories.get(2*position).getHacks());
+                    intent.putExtra("TITLE", (String) categories.get(2*position).getCategory_name());
                     ctx.startActivity(intent);
                 }
             });
         } else {
-            ivBackgroundShadowCircleImageLeft.setVisibility(View.GONE);
-            ivBackgroundCircleImageLeft.setVisibility(View.GONE);
+            ivFrameCategoryLeft.setVisibility(View.GONE);
             civLeft.setVisibility(View.GONE);
         }
         if (position*2+1 < categories.size()) {
-            tvNameCategoryRight.setText(categories.get(position*2+1).getCategory_name().replace('_', ' '));
+            categories.get(position*2+1).setCategory_name(categories.get(position*2+1).getCategory_name().replace('_', ' '));
+            tvNameCategoryRight.setText(categories.get(position*2+1).getCategory_name());
             Glide.with(ctx)
                     .load(categories.get(position*2+1)
                             .getCategory_image())
@@ -93,14 +92,14 @@ public class CategoriesAdapter extends BaseAdapter {
             civRight.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ctx, Hack.class);
+                    Intent intent = new Intent(ctx, Detail.class);
                     intent.putExtra("LISTHACKS", (ArrayList) categories.get(2*position+1).getHacks());
+                    intent.putExtra("TITLE", (String) categories.get(2*position+1).getCategory_name());
                     ctx.startActivity(intent);
                 }
             });
         } else {
-            ivBackgroundShadowCircleImageRight.setVisibility(View.GONE);
-            ivBackgroundCircleImageRight.setVisibility(View.GONE);
+            ivFrameCategoryRight.setVisibility(View.GONE);
             civRight.setVisibility(View.GONE);
         }
         return view;

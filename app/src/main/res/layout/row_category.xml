@@ -3,122 +3,79 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/barrierMiddle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
-    </TextView>
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="185dp"
-        android:layout_height="185dp"
-        android:src="@drawable/shadow_circle"
-        android:id="@+id/ivBackgroundShadowCircleImageLeft"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/barrierMiddle" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/background_circle_image"
-        android:id="@+id/ivBackgroundCircleImageLeft"
-        app:layout_constraintTop_toTopOf="@id/ivBackgroundShadowCircleImageLeft"
-        app:layout_constraintBottom_toBottomOf="@id/ivBackgroundShadowCircleImageLeft"
-        app:layout_constraintLeft_toLeftOf="@id/ivBackgroundShadowCircleImageLeft"
-        app:layout_constraintRight_toRightOf="@id/ivBackgroundShadowCircleImageLeft" />
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="V,1:1"
-        android:layout_margin="5dp"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintDimensionRatio="H, 1:1"
+        android:src="@drawable/frame_category"
+        android:id="@+id/ivFrameCategoryLeft"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ivFrameCategoryRight" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civLeft"
-        app:layout_constraintTop_toTopOf="@id/ivBackgroundCircleImageLeft"
-        app:layout_constraintBottom_toBottomOf="@id/ivBackgroundCircleImageLeft"
-        app:layout_constraintLeft_toLeftOf="@id/ivBackgroundCircleImageLeft"
-        app:layout_constraintRight_toRightOf="@id/ivBackgroundCircleImageLeft">
-    </de.hdodenhof.circleimageview.CircleImageView>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintLeft_toLeftOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintRight_toRightOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintTop_toTopOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintVertical_bias="0.365"
+        app:layout_constraintWidth_percent="0.35"></de.hdodenhof.circleimageview.CircleImageView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvNameCategoryLeft"
-        app:layout_constraintTop_toBottomOf="@id/ivBackgroundCircleImageLeft"
+        app:layout_constraintTop_toBottomOf="@id/civLeft"
+        app:layout_constraintLeft_toLeftOf="@id/civLeft"
+        app:layout_constraintRight_toRightOf="@id/civLeft"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/barrier1"
-        app:layout_constraintRight_toRightOf="@id/barrier2"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
         android:textSize="15dp"
+        app:layout_constraintVertical_bias="0.6"
         android:textColor="@color/name_color_category">
     </TextView>
     <ImageView
-        android:layout_width="185dp"
-        android:layout_height="185dp"
-        android:src="@drawable/shadow_circle"
-        android:id="@+id/ivBackgroundShadowCircleImageRight"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/barrierMiddle"
-        app:layout_constraintRight_toRightOf="parent" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/background_circle_image"
-        android:id="@+id/ivBackgroundCircleImageRight"
-        app:layout_constraintTop_toTopOf="@id/ivBackgroundShadowCircleImageRight"
-        app:layout_constraintBottom_toBottomOf="@id/ivBackgroundShadowCircleImageRight"
-        app:layout_constraintLeft_toLeftOf="@id/ivBackgroundShadowCircleImageRight"
-        app:layout_constraintRight_toRightOf="@id/ivBackgroundShadowCircleImageRight" />
-    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintDimensionRatio="H, 1:1"
+        android:src="@drawable/frame_category"
+        android:id="@+id/ivFrameCategoryRight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civRight"
-        app:layout_constraintDimensionRatio="V,1:1"
-        android:layout_margin="5dp"
-        app:layout_constraintTop_toTopOf="@id/ivBackgroundCircleImageRight"
-        app:layout_constraintBottom_toBottomOf="@id/ivBackgroundCircleImageRight"
-        app:layout_constraintLeft_toLeftOf="@id/ivBackgroundCircleImageRight"
-        app:layout_constraintRight_toRightOf="@id/ivBackgroundCircleImageRight">
-    </de.hdodenhof.circleimageview.CircleImageView>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivFrameCategoryRight"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintLeft_toLeftOf="@id/ivFrameCategoryRight"
+        app:layout_constraintRight_toRightOf="@id/ivFrameCategoryRight"
+        app:layout_constraintTop_toTopOf="@id/ivFrameCategoryRight"
+        app:layout_constraintVertical_bias="0.365"
+        app:layout_constraintWidth_percent="0.35"></de.hdodenhof.circleimageview.CircleImageView>
     <TextView
         android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvNameCategoryRight"
-        app:layout_constraintTop_toBottomOf="@id/ivBackgroundCircleImageRight"
-        app:layout_constraintLeft_toLeftOf="@id/barrier3"
-        app:layout_constraintRight_toRightOf="@id/barrier4"
+        app:layout_constraintTop_toBottomOf="@id/civRight"
+        app:layout_constraintLeft_toLeftOf="@id/civRight"
+        app:layout_constraintRight_toRightOf="@id/civRight"
         app:layout_constraintBottom_toBottomOf="parent"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
         android:textSize="15dp"
-        android:textColor="@color/name_color_category">
+        android:textColor="@color/name_color_category"
+        app:layout_constraintVertical_bias="0.6">
     </TextView>
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        app:constraint_referenced_ids="ivBackgroundCircleImageLeft"/>
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="right"
-        app:constraint_referenced_ids="ivBackgroundCircleImageLeft"/>
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        app:constraint_referenced_ids="ivBackgroundCircleImageRight"/>
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="right"
-        app:constraint_referenced_ids="ivBackgroundCircleImageRight"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

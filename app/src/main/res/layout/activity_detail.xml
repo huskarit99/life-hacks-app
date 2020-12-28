@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/arrow_back"
-        android:id="@+id/btnArrowBack"
+        android:id="@+id/ivArrowBack"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tvTitle"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_setting"
-        android:id="@+id/ivButtonSetting"
+        android:id="@+id/ivSetting"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -49,7 +49,7 @@
         android:textStyle="bold"
         android:text="Chăm sóc bé"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivButtonSetting"
+        app:layout_constraintRight_toLeftOf="@id/ivSetting"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.07"
@@ -127,6 +127,7 @@
     <TextView
         android:layout_width="290dp"
         android:layout_height="260dp"
+        android:id="@+id/tvContentHack"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -148,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_back_left"
-        android:id="@+id/btnBackLeft"
+        android:id="@+id/ivBackLeft"
         app:layout_constraintTop_toBottomOf="@+id/frame1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -159,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_back_right"
-        android:id="@+id/btnBackRight"
+        android:id="@+id/ivBackRight"
         app:layout_constraintTop_toBottomOf="@id/frame1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/barrierCenter"
@@ -183,51 +184,51 @@
         android:layout_height="wrap_content"
         android:id="@+id/barrierUnderButtonBack"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="btnBackLeft, btnBackRight">
+        app:constraint_referenced_ids="ivBackLeft, ivBackRight">
 
     </androidx.constraintlayout.widget.Barrier>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_fb"
-        android:id="@+id/btnSharingFb"
+        android:id="@+id/ivSharingFb"
         app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btnSharingTwitter"
+        app:layout_constraintRight_toLeftOf="@id/ivSharingTwitter"
         app:layout_constraintVertical_bias="0.6">
     </ImageView>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_twitter"
-        android:id="@+id/btnSharingTwitter"
+        android:id="@+id/ivSharingTwitter"
         app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/btnSharingFb"
-        app:layout_constraintRight_toLeftOf="@id/btnSharingMail"
+        app:layout_constraintLeft_toRightOf="@id/ivSharingFb"
+        app:layout_constraintRight_toLeftOf="@id/ivSharingMail"
         app:layout_constraintVertical_bias="0.6">
     </ImageView>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_mail"
-        android:id="@+id/btnSharingMail"
+        android:id="@+id/ivSharingMail"
         app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btnMoreOption"
-        app:layout_constraintLeft_toRightOf="@id/btnSharingTwitter"
+        app:layout_constraintRight_toLeftOf="@id/ivMoreOption"
+        app:layout_constraintLeft_toRightOf="@id/ivSharingTwitter"
         app:layout_constraintVertical_bias="0.6">
     </ImageView>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/more_option"
-        android:id="@+id/btnMoreOption"
+        android:id="@+id/ivMoreOption"
         app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/btnSharingMail"
+        app:layout_constraintLeft_toRightOf="@id/ivSharingMail"
         app:layout_constraintVertical_bias="0.6">
     </ImageView>
     <androidx.constraintlayout.widget.Barrier
@@ -235,7 +236,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/barrierTopSharingButtons"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="btnSharingFb, btnSharingMail, btnSharingTwitter, btnMoreOption">
+        app:constraint_referenced_ids="ivSharingFb, ivSharingMail, ivSharingTwitter, ivMoreOption">
     </androidx.constraintlayout.widget.Barrier>
     <TextView
         android:layout_width="wrap_content"
@@ -246,7 +247,7 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@id/barrierTopSharingButtons"
         app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
-        app:layout_constraintLeft_toLeftOf="@id/btnBackLeft"
+        app:layout_constraintLeft_toLeftOf="@id/ivBackLeft"
         app:layout_constraintVertical_bias="0.75">
     </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

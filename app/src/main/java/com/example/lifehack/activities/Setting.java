@@ -29,11 +29,18 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Setting extends AppCompatActivity {
+    ImageView ivArrowBack, ivNotify, ivUpgradeVip, ivNavigationBar;
+
+    boolean turnOn = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         configActionBarAndNavigationBar();
+
+        mapping();
+        eventListener();
     }
 
     @Override
@@ -52,5 +59,52 @@ public class Setting extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE
                 | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         decorView.setSystemUiVisibility(flags);
+    }
+
+
+    private void eventListener() {
+        ivArrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        ivNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (turnOn == false) {
+                    ivNotify.setImageResource(R.drawable.btn_notify_on);
+                    turnOn = true;
+                }
+                else {
+                    ivNotify.setImageResource(R.drawable.btn_notify);
+                    turnOn = false;
+                }
+            }
+        });
+
+        ivUpgradeVip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Setting.this, Premium.class);
+                startActivity(intent);
+            }
+        });
+
+        ivNavigationBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+
+    private void mapping() {
+        ivArrowBack = findViewById(R.id.ivArrowBack);
+        ivNotify = findViewById(R.id.ivNotify);
+        ivUpgradeVip = findViewById(R.id.ivUpgradeVip);
+        ivNavigationBar = findViewById(R.id.ivNavigationBar);
     }
 }
