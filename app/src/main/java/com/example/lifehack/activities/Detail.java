@@ -119,6 +119,7 @@ public class Detail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                moveTaskToBack(true);
             }
         });
 
@@ -149,12 +150,6 @@ public class Detail extends AppCompatActivity {
                 shareOnOtherApp();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        Process.killProcess(Process.myPid());
-        super.onDestroy();
     }
 
     private void shareOnTwitter() {

@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                moveTaskToBack(true);
             }
         });
 
@@ -165,12 +166,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        Process.killProcess(Process.myPid());
-        super.onDestroy();
     }
 
     private void mapping() {
