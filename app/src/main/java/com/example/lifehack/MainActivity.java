@@ -3,21 +3,12 @@ package com.example.lifehack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Process;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NetworkError;
@@ -27,25 +18,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
-import com.example.lifehack.activities.Detail;
-import com.example.lifehack.activities.Hack;
 import com.example.lifehack.activities.Setting;
 import com.example.lifehack.adapters.CategoriesAdapter;
 import com.example.lifehack.databases.LocalDatabase;
 import com.example.lifehack.models.Category;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
 
 public class MainActivity extends AppCompatActivity {
     ImageView ivNavigationBar, ivSetting;
@@ -62,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         localDatabase = new LocalDatabase(this);
-        setContentView(R.layout.activity_on_boarding);
+        setContentView(R.layout.activity_waiting);
         configActionBarAndNavigationBar();
 
         loadDataFromCacheMemory();
@@ -77,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configActionBarAndNavigationBar() {
         getSupportActionBar().hide();
-        getWindow().setStatusBarColor(Color.parseColor("#F9FCFD"));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.status_bar_color2));
         View decorView = getWindow().getDecorView();
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -183,6 +165,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        Process.killProcess(Process.myPid());
+        super.onDestroy();
     }
 
     private void mapping() {
