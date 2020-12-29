@@ -3,9 +3,7 @@ package com.example.lifehack;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Process;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
