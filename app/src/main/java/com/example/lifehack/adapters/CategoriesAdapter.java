@@ -73,6 +73,7 @@ public class CategoriesAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ctx, Detail.class);
+                    intent.putExtra("INDEX_OF_CURRENT_CATEGORY", (String) String.valueOf(2*position));
                     intent.putExtra("LISTHACKS", (ArrayList) categories.get(2*position).getHacks());
                     intent.putExtra("TITLE", (String) categories.get(2*position).getCategory_name());
                     ctx.startActivity(intent);
@@ -93,6 +94,7 @@ public class CategoriesAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ctx, Detail.class);
+                    intent.putExtra("INDEX_OF_CURRENT_CATEGORY", (String) String.valueOf(2*position+1));
                     intent.putExtra("LISTHACKS", (ArrayList) categories.get(2*position+1).getHacks());
                     intent.putExtra("TITLE", (String) categories.get(2*position+1).getCategory_name());
                     ctx.startActivity(intent);

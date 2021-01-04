@@ -7,18 +7,24 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.example.lifehack.R;
+import com.example.lifehack.databases.LocalDatabase;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -29,14 +35,18 @@ public class Detail extends AppCompatActivity {
     ImageView ivBackLeft, ivBackRight, ivArrowBack,
             ivSetting, ivSharingFb, ivSharingTwitter,
             ivSharingMail, ivMoreOption, ivNavigationBar;
+
     ArrayList<String> hacks;
+    LocalDatabase localDatabase;
     ShareDialog shareDialog = new ShareDialog(this);
-    int index_of_Hacks = 0;
+    int index_of_hack;
+    int index_of_current_category;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        localDatabase = new LocalDatabase(this);
         configActionBarAndNavigationBar();
 
         mapping();
@@ -47,6 +57,9 @@ public class Detail extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (index_of_hack == -1) {
+            index_of_hack = 0;
+        }
         configActionBarAndNavigationBar();
     }
 
@@ -69,18 +82,22 @@ public class Detail extends AppCompatActivity {
 
     private void eventListener() {
         if (hacks.size() != 0) {
-            tvContentHack.setText(hacks.get(index_of_Hacks));
+            Intent intent = getIntent();
+            index_of_current_category = Integer.parseInt(intent.getStringExtra("INDEX_OF_CURRENT_CATEGORY"));
+            index_of_hack = localDatabase.getCurrentPosition(index_of_current_category);
+            tvContentHack.setText(hacks.get(index_of_hack));
         }
 
         ivBackRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                index_of_Hacks += 1;
+                index_of_hack += 1;
                 if (hacks.size() != 0) {
-                    if (index_of_Hacks == hacks.size()) {
-                        index_of_Hacks = 0;
+                    if (index_of_hack == hacks.size()) {
+                        index_of_hack = 0;
                     }
-                    tvContentHack.setText(hacks.get(index_of_Hacks));
+                    localDatabase.setCurrentPosition(index_of_current_category, index_of_hack);
+                    tvContentHack.setText(hacks.get(index_of_hack));
                 }
             }
         });
@@ -88,12 +105,13 @@ public class Detail extends AppCompatActivity {
         ivBackLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                index_of_Hacks -= 1;
+                index_of_hack -= 1;
                 if (hacks.size() != 0) {
-                    if (index_of_Hacks == -1) {
-                        index_of_Hacks = hacks.size() - 1;
+                    if (index_of_hack == -1) {
+                        index_of_hack = hacks.size() - 1;
                     }
-                    tvContentHack.setText(hacks.get(index_of_Hacks));
+                    localDatabase.setCurrentPosition(index_of_current_category, index_of_hack);
+                    tvContentHack.setText(hacks.get(index_of_hack));
                 }
             }
         });
@@ -151,7 +169,7 @@ public class Detail extends AppCompatActivity {
     }
 
     private void shareOnTwitter() {
-        String message = "I found a life tip: " + '"' + hacks.get(index_of_Hacks) + '"';
+        String message = "I found a life tip: " + '"' + hacks.get(index_of_hack) + '"';
         Intent tweetIntent = new Intent(Intent.ACTION_SEND);
         tweetIntent.putExtra(Intent.EXTRA_TEXT, message);
         tweetIntent.setType("text/plain");
@@ -199,21 +217,30 @@ public class Detail extends AppCompatActivity {
                     Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
             v.draw(canvas);
-            SharePhoto sharePhoto = new SharePhoto.Builder()
-                    .setBitmap(bitmap)
-                    .setCaption("Testing")
-                    .build();
-            SharePhotoContent content = new SharePhotoContent.Builder()
-                    .addPhoto(sharePhoto)
-                    .build();
-            shareDialog.show(content);
+            String pathOfBitmapPhoto = Environment.getExternalStorageDirectory().toString() + "/" + "bikipsharing" + ".jpg";
+            File imageFile = new File(pathOfBitmapPhoto);
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            Uri bmpUri = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", imageFile);
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setType("image/*");
+            intent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+            intent.setPackage("com.facebook.katana");
+            startActivity(Intent.createChooser(intent, "Share via"));
+
         } catch(Exception e) {
+//            System.out.println(e);
             Toast.makeText(this, "Please intall the Facebook", Toast.LENGTH_LONG).show();
         }
     }
 
     private void shareOnMail() {
-        String message = "I found a life tip: " + '"' + hacks.get(index_of_Hacks) + '"';
+        String message = "I found a life tip: " + '"' + hacks.get(index_of_hack) + '"';
         Intent email = new Intent(Intent.ACTION_SEND);
         email.putExtra(Intent.EXTRA_TEXT, message);
         email.setType("message/rfc822");
@@ -221,7 +248,7 @@ public class Detail extends AppCompatActivity {
     }
 
     private void shareOnOtherApp() {
-        String message = "I found a life tip: " + '"' + hacks.get(index_of_Hacks) + '"';
+        String message = "I found a life tip: " + '"' + hacks.get(index_of_hack) + '"';
         Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
         emailIntent.setType("text/plain");
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);

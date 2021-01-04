@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">LifeHack</string>
+    <string name="app_name">Bí Kíp</string>
+    <string name="CURRENT_OF_POSITION">CURRENT_POSITION</string>
     <string name="CATEGORIES">CATEGORIES</string>
-    <string name="NAME_LOCAL_DATABASE">life_hack</string>
+    <string name="NAME_LOCAL_DATABASE">LIFE_HACK</string>
     <string name="facebook_app_id">840673686782363</string>
     <string name="facebook_login_protocol_scheme">fb840673686782363</string>
 </resources>
