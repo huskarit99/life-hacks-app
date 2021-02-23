@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivFrameCategoryLeft"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintDimensionRatio="H, 1:1"
         android:src="@drawable/frame_category"
-        android:id="@+id/ivFrameCategoryLeft"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H, 1:1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivFrameCategoryRight" />
+        app:layout_constraintRight_toLeftOf="@id/ivFrameCategoryRight"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civLeft"
@@ -26,32 +27,46 @@
         app:layout_constraintRight_toRightOf="@id/ivFrameCategoryLeft"
         app:layout_constraintTop_toTopOf="@id/ivFrameCategoryLeft"
         app:layout_constraintVertical_bias="0.365"
-        app:layout_constraintWidth_percent="0.34">
-    </de.hdodenhof.circleimageview.CircleImageView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvNameCategoryLeft"
-        app:layout_constraintTop_toBottomOf="@id/civLeft"
-        app:layout_constraintLeft_toLeftOf="@id/civLeft"
-        app:layout_constraintRight_toRightOf="@id/civLeft"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        app:layout_constraintVertical_bias="1"
-        android:textColor="@color/Neutral">
-    </TextView>
-    <ImageView
+        app:layout_constraintWidth_percent="0.34" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civLockLeft"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintDimensionRatio="H, 1:1"
-        android:src="@drawable/frame_category"
-        android:id="@+id/ivFrameCategoryRight"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/frame_lock_category"
+        app:layout_constraintBottom_toBottomOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintLeft_toLeftOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintRight_toRightOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintTop_toTopOf="@id/ivFrameCategoryLeft"
+        app:layout_constraintVertical_bias="0.365"
+        app:layout_constraintWidth_percent="0.34" />
+
+    <TextView
+        android:id="@+id/tvNameCategoryLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Neutral"
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/civLeft"
+        app:layout_constraintRight_toRightOf="@id/civLeft"
+        app:layout_constraintTop_toBottomOf="@id/civLeft"
+        app:layout_constraintVertical_bias="1"></TextView>
+
+    <ImageView
+        android:id="@+id/ivFrameCategoryRight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/frame_category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H, 1:1"
         app:layout_constraintLeft_toRightOf="@id/ivFrameCategoryLeft"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civRight"
@@ -65,18 +80,32 @@
         app:layout_constraintTop_toTopOf="@id/ivFrameCategoryRight"
         app:layout_constraintVertical_bias="0.365"
         app:layout_constraintWidth_percent="0.34"></de.hdodenhof.circleimageview.CircleImageView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civLockRight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/frame_lock_category"
+        app:layout_constraintBottom_toBottomOf="@id/ivFrameCategoryRight"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintLeft_toLeftOf="@id/ivFrameCategoryRight"
+        app:layout_constraintRight_toRightOf="@id/ivFrameCategoryRight"
+        app:layout_constraintTop_toTopOf="@id/ivFrameCategoryRight"
+        app:layout_constraintVertical_bias="0.365"
+        app:layout_constraintWidth_percent="0.34"></de.hdodenhof.circleimageview.CircleImageView>
+
     <TextView
-        android:singleLine="true"
+        android:id="@+id/tvNameCategoryRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvNameCategoryRight"
-        app:layout_constraintTop_toBottomOf="@id/civRight"
+        android:singleLine="true"
+        android:textColor="@color/Neutral"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/civRight"
         app:layout_constraintRight_toRightOf="@id/civRight"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textStyle="bold"
-        android:textSize="15dp"
-        android:textColor="@color/Neutral"
-        app:layout_constraintVertical_bias="1">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@id/civRight"
+        app:layout_constraintVertical_bias="1"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

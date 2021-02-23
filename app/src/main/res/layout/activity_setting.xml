@@ -1,162 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Light"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/Light">
+
     <ImageView
+        android:id="@+id/ivBgHeaderDetail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".25"
-        android:id="@+id/ivBgHeaderDetail"
         android:scaleType="fitXY"
         android:src="@drawable/bg_header_setting"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0">
-    </ImageView>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.7"
-        android:scaleType="fitXY"
-        android:id="@+id/ivBgBodyDetail"
-        android:src="@drawable/bg_body_setting"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </ImageView>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         app:layout_constraintHeight_percent=".25"
-        android:scaleType="fitXY"
-        android:id="@+id/ivBgFooterDetail"
-        android:src="@drawable/bg_footer_setting"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"></ImageView>
+
+    <ImageView
+        android:id="@+id/ivBgBodyDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_body_setting"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1">
-    </ImageView>
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/ivBgFooterDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_footer_setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent=".25"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"></ImageView>
+
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvTitle"
+        android:layout_margin="0dp"
+        android:text="Cài đặt"
+        android:textColor="@color/Primary"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:text="Cài đặt"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.07"
-        android:textColor="@color/Primary"
-        android:layout_margin="0dp">
-    </TextView>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"></TextView>
+
     <ImageView
         android:id="@+id/ivArrowBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/arrow_back_setting"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="@id/ivEvaluate"
         app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintVertical_bias="0.073">
-    </ImageView>
+        app:layout_constraintLeft_toLeftOf="@id/ivEvaluate"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073"></ImageView>
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
         android:id="@+id/ivEvaluate"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:src="@drawable/btn_evaluate"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.1">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
         android:id="@+id/ivRespone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:src="@drawable/btn_respone"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.25">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
-        android:src="@drawable/btn_policy"
         android:id="@+id/ivPolicy"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.4">
-    </ImageView>
-    <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:src="@drawable/btn_policy"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
         app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
-        android:src="@drawable/btn_notify"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
+    <ImageView
         android:id="@+id/ivNotify"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.55">
-    </ImageView>
-    <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:src="@drawable/btn_notify"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
         app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
-        android:src="@drawable/btn_upgrade_account"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
+    <ImageView
         android:id="@+id/ivUpgradeVip"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/btn_upgrade_account"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.7">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintWidth_percent="0.9"
         android:src="@drawable/btn_restore"
-        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ivNavigationBar"
-        app:layout_constraintVertical_bias="0.85">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintWidth_percent="0.9"></ImageView>
+
     <ImageView
+        android:id="@+id/ivNavigationBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ivNavigationBar"
+        android:layout_margin="0dp"
         android:src="@drawable/home_indicator"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.98"
-        android:layout_margin="0dp">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98"></ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>

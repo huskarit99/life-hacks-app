@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "504707752168",
+    "firebase_url": "https://life-hacks-app-297910-default-rtdb.firebaseio.com",
+    "project_id": "life-hacks-app-297910",
+    "storage_bucket": "life-hacks-app-297910.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504707752168:android:d1a93073d84fb379fd295d",
+        "android_client_info": {
+          "package_name": "com.merci.lifehack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504707752168-kmcnkpjaocruhcgdoasbuk2rfmaob7jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5tOU-2P9qRtK3OkE6gdajY4ab3s9c_zA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504707752168-kmcnkpjaocruhcgdoasbuk2rfmaob7jh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

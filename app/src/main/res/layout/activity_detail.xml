@@ -1,253 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#83C5BE"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#83C5BE">
+
     <ImageView
+        android:id="@+id/ivBgHeaderDetail"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".25"
-        android:id="@+id/ivBgHeaderDetail"
         android:scaleType="fitXY"
         android:src="@drawable/bg_header_detail"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent=".25"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"></ImageView>
+
     <ImageView
+        android:id="@+id/ivArrowBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/arrow_back"
-        android:id="@+id/ivArrowBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/tvTitle"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.073"
-        app:layout_constraintHorizontal_bias="0.7">
-    </ImageView>
+        app:layout_constraintVertical_bias="0.073"></ImageView>
+
     <ImageView
+        android:id="@+id/ivSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_setting"
-        android:id="@+id/ivSetting"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.07"
-        app:layout_constraintHorizontal_bias="0.95">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"></ImageView>
+
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvTitle"
+        android:layout_margin="0dp"
+        android:text="Chăm sóc bé"
+        android:textColor="@color/White"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:text="Chăm sóc bé"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivSetting"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.07"
-        android:textColor="@color/White"
         app:layout_constraintHorizontal_bias="0.25"
-        android:layout_margin="0dp">
-    </TextView>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/ivSetting"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07"></TextView>
+
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.7"
-        android:scaleType="fitXY"
         android:id="@+id/ivBgBodyDetail"
-        android:src="@drawable/bg_body_detail"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </ImageView>
-    <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent=".25"
         android:scaleType="fitXY"
-        android:id="@+id/ivBgFooterDetail"
-        android:src="@drawable/bg_footer_detail"
-        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/bg_body_detail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.7"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <ImageView
+        android:id="@+id/ivBgFooterDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_footer_detail"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="1">
-    </ImageView>
+        app:layout_constraintHeight_percent=".25"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"></ImageView>
+
     <TextView
+        android:id="@+id/barrierCenter"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/barrierCenter"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
     <ImageView
+        android:id="@+id/frame3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/frame3"
-        android:id="@+id/frame3"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.42">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.42"></ImageView>
+
     <ImageView
+        android:id="@+id/frame2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/frame2"
-        android:id="@+id/frame2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.36">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36"></ImageView>
+
     <ImageView
+        android:id="@+id/frame1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/frame1"
-        android:id="@+id/frame1"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.3">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"></ImageView>
+
     <TextView
+        android:id="@+id/tvContentHack"
         android:layout_width="290dp"
         android:layout_height="260dp"
-        android:id="@+id/tvContentHack"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_max="290dp"
-        app:layout_constraintHeight_max="260dp"
-        app:layout_constraintVertical_bias="0.32"
-        android:textColor="@color/Gray"
-        android:textSize="20dp"
+        android:autoSizeMaxTextSize="20dp"
+        android:autoSizeMinTextSize="1dp"
+        android:autoSizeStepGranularity="1dp"
         android:autoSizeTextType="uniform"
         android:letterSpacing="0.06"
         android:lineSpacingExtra="3dp"
-        android:autoSizeMinTextSize="1dp"
-        android:autoSizeMaxTextSize="20dp"
-        android:autoSizeStepGranularity="1dp"
-        android:text="Với những bé mới lọt lòng, tư thế bế trẻ an toàn và dễ dàng nhất là cho bé nằm ngang. Mẹ cố gắng giữ cho phần đầu và cổ của bé nằm trên một đường thẳng, bụng bé ép vào bụng mẹ, mặt bé quay vào ngực mẹ.">
-    </TextView>
+        android:text="Với những bé mới lọt lòng, tư thế bế trẻ an toàn và dễ dàng nhất là cho bé nằm ngang. Mẹ cố gắng giữ cho phần đầu và cổ của bé nằm trên một đường thẳng, bụng bé ép vào bụng mẹ, mặt bé quay vào ngực mẹ."
+        android:textColor="@color/Gray"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_max="260dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.32"
+        app:layout_constraintWidth_max="290dp"></TextView>
+
     <ImageView
+        android:id="@+id/ivBackLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_back_left"
-        android:id="@+id/ivBackLeft"
-        app:layout_constraintTop_toBottomOf="@+id/frame1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/barrierCenter"
-        app:layout_constraintVertical_bias="0.1">
-    </ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/frame1"
+        app:layout_constraintVertical_bias="0.1"></ImageView>
+
     <ImageView
+        android:id="@+id/ivBackRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_back_right"
-        android:id="@+id/ivBackRight"
-        app:layout_constraintTop_toBottomOf="@id/frame1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/barrierCenter"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.1">
-    </ImageView>
+        app:layout_constraintTop_toBottomOf="@id/frame1"
+        app:layout_constraintVertical_bias="0.1"></ImageView>
+
     <ImageView
+        android:id="@+id/ivNavigationBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ivNavigationBar"
+        android:layout_margin="0dp"
         android:src="@drawable/home_indicator"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintVertical_bias="0.98"
-        android:layout_margin="0dp">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98"></ImageView>
+
     <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierUnderButtonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/barrierUnderButtonBack"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="ivBackLeft, ivBackRight">
 
     </androidx.constraintlayout.widget.Barrier>
+
     <ImageView
+        android:id="@+id/ivSharingFb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_fb"
-        android:id="@+id/ivSharingFb"
-        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/ivSharingTwitter"
-        app:layout_constraintVertical_bias="0.6">
-    </ImageView>
+        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
+        app:layout_constraintVertical_bias="0.6"></ImageView>
+
     <ImageView
+        android:id="@+id/ivSharingTwitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_twitter"
-        android:id="@+id/ivSharingTwitter"
-        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/ivSharingFb"
         app:layout_constraintRight_toLeftOf="@id/ivSharingMail"
-        app:layout_constraintVertical_bias="0.6">
-    </ImageView>
+        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
+        app:layout_constraintVertical_bias="0.6"></ImageView>
+
     <ImageView
+        android:id="@+id/ivSharingMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/share_mail"
-        android:id="@+id/ivSharingMail"
-        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/ivMoreOption"
         app:layout_constraintLeft_toRightOf="@id/ivSharingTwitter"
-        app:layout_constraintVertical_bias="0.6">
-    </ImageView>
+        app:layout_constraintRight_toLeftOf="@id/ivMoreOption"
+        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
+        app:layout_constraintVertical_bias="0.6"></ImageView>
+
     <ImageView
+        android:id="@+id/ivMoreOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/more_option"
-        android:id="@+id/ivMoreOption"
-        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@id/ivSharingMail"
-        app:layout_constraintVertical_bias="0.6">
-    </ImageView>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
+        app:layout_constraintVertical_bias="0.6"></ImageView>
+
     <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierTopSharingButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/barrierTopSharingButtons"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="ivSharingFb, ivSharingMail, ivSharingTwitter, ivMoreOption">
-    </androidx.constraintlayout.widget.Barrier>
+        app:constraint_referenced_ids="ivSharingFb, ivSharingMail, ivSharingTwitter, ivMoreOption"></androidx.constraintlayout.widget.Barrier>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chia sẻ bí kíp này:"
-        android:textStyle="bold"
-        android:textSize="20dp"
         android:textColor="@color/White"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/barrierTopSharingButtons"
-        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
         app:layout_constraintLeft_toLeftOf="@id/ivBackLeft"
-        app:layout_constraintVertical_bias="0.75">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@id/barrierUnderButtonBack"
+        app:layout_constraintVertical_bias="0.75"></TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

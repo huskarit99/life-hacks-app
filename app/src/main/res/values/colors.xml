@@ -7,6 +7,7 @@
     <color name="Neutral">#E29578</color>
     <color name="White">#FFFFFF</color>
     <color name="Gray">#4F4F4F</color>
+    <color name="price_button_grey">#555</color>
 
     <color name="status_bar_color1">#41999A</color>
     <color name="status_bar_color2">#F9FCFD</color>
